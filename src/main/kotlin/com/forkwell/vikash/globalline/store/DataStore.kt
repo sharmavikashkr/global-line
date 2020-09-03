@@ -2,7 +2,7 @@ package com.forkwell.vikash.globalline.store
 
 class DataStore {
 
-    val dataStoreMap: MutableMap<String, String> = HashMap<String, String>()
+    val dataStoreMap: MutableMap<String, String> = LinkedHashMap<String, String>()
 
     // put and return if value has been updated
     fun putVal(key: String, newValue: String): Boolean {
@@ -21,5 +21,9 @@ class DataStore {
 
     fun clear() {
         dataStoreMap.clear()
+    }
+
+    fun getStore(): Map<String, String> {
+        return dataStoreMap;
     }
 }

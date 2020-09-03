@@ -1,5 +1,6 @@
 package com.forkwell.vikash.globalline.controller
 
+import com.forkwell.vikash.globalline.dto.EmailReport
 import com.forkwell.vikash.globalline.service.FileProcessorService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PostMapping
@@ -15,7 +16,7 @@ class FileProcessorController @Autowired constructor(
 ) {
 
     @PostMapping("/process")
-    fun process(@RequestPart file: MultipartFile) {
-        fileProcessorService.process(file);
+    fun process(@RequestPart file: MultipartFile): EmailReport {
+        return fileProcessorService.process(file);
     }
 }

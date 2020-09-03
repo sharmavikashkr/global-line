@@ -1,16 +1,15 @@
 package com.forkwell.vikash.globalline.service
 
 import com.forkwell.vikash.globalline.FileValidator
+import com.forkwell.vikash.globalline.dto.EmailReport
 import com.forkwell.vikash.globalline.helper.XLSXParser
 import com.forkwell.vikash.globalline.store.DataStore
 import org.apache.commons.io.FileUtils
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
-import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.multipart.MultipartFile
-import java.io.*
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.annotation.PostConstruct
@@ -33,7 +32,7 @@ class FileProcessorService @Autowired constructor(
     }
 
     // process XLSX file
-    fun process(file: MultipartFile) {
+    fun process(file: MultipartFile): EmailReport {
         val fileName = fileValidator.validate(file)
         LOG.info("New file received: {}", fileName)
         if (compareStore.isEmpty()) {
@@ -64,6 +63,9 @@ class FileProcessorService @Autowired constructor(
 
         LOG.info("Deleting tempFile: {}", fileName)
         tempFile.delete()
+
+        LOG.info("Generating email report")
+        return generateEmailReport()
     }
 
     // download previously uploaded file to FTP and load DataStore
@@ -103,5 +105,17 @@ class FileProcessorService @Autowired constructor(
             dataStore.putVal(cells[0].trim(), cells[1].trim())
             compareStore.putVal(cells[0].trim(), cells[1].trim())
         }
+    }
+
+    // generate email report for the new content
+    fun generateEmailReport(): EmailReport {
+        val subject = "Global Line Report | " + SimpleDateFormat("yyyyMMdd-HHmm").format(Date())
+        println(subject)
+        val reportBuilder = StringBuilder("PFB the updated records").append("/n");
+        for ((key, value) in dataStore.getStore()) {
+            reportBuilder.append(key + "\t\t" + value).append("/n")
+            println(key + "\t\t" + value)
+        }
+        return EmailReport(subject, reportBuilder.toString())
     }
 }
