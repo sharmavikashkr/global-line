@@ -1,0 +1,18 @@
+app:
+    ftp:
+        host: speedtest.tele2.net
+        port: 22
+        username: anonymous
+        password: anonymous
+        workspace: "/upload/"
+
+#app:
+#    ftp:
+#        host: ftp.dlptest.com
+#        port: 21
+#        username: dlpuser@dlptest.com
+#        password: eUj8GeW55SvYaswqUyDSm5v6N
+#        workspace: "/upload/"
+
+server:
+    port: 9090
