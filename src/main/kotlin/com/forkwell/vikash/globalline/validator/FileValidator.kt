@@ -1,4 +1,4 @@
-package com.forkwell.vikash.globalline
+package com.forkwell.vikash.globalline.validator
 
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus

@@ -25,10 +25,8 @@ class XLSXParser {
             for (row: Row in sheet) {
                 val sb = StringBuilder()
                 for (cell: Cell in row) {
-                    print(cell.getStringCellValue() + "\t\t");
                     sb.append(cell.getStringCellValue()).append(",")
                 }
-                println()
                 rowList.add(sb.toString())
             }
             fis.close()

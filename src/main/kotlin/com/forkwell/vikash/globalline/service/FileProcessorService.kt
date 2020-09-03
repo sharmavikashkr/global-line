@@ -1,6 +1,6 @@
 package com.forkwell.vikash.globalline.service
 
-import com.forkwell.vikash.globalline.FileValidator
+import com.forkwell.vikash.globalline.validator.FileValidator
 import com.forkwell.vikash.globalline.dto.EmailReport
 import com.forkwell.vikash.globalline.helper.XLSXParser
 import com.forkwell.vikash.globalline.store.DataStore

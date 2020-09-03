@@ -13,3 +13,9 @@ Implement a data processing application with Kotlin/Java
 * cd target
 * java -jar global-line-0.0.1-SNAPSHOT.jar 
 
+# Access the application
+* Application runs @ port: 9090
+* Access the swagger of the application @ http://localhost:9090/swagger-ui.html
+
+# Run Test
+* run test GlobalLineApplicationTests.processFile()
